@@ -1,0 +1,2025 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot test 1`] = `
+{
+  "Mappings": {
+    "LatestNodeRuntimeMap": {
+      "af-south-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-east-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-northeast-3": {
+        "value": "nodejs20.x",
+      },
+      "ap-south-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-south-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-1": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-2": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-3": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-4": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-5": {
+        "value": "nodejs20.x",
+      },
+      "ap-southeast-7": {
+        "value": "nodejs20.x",
+      },
+      "ca-central-1": {
+        "value": "nodejs20.x",
+      },
+      "ca-west-1": {
+        "value": "nodejs20.x",
+      },
+      "cn-north-1": {
+        "value": "nodejs18.x",
+      },
+      "cn-northwest-1": {
+        "value": "nodejs18.x",
+      },
+      "eu-central-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-central-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-isoe-west-1": {
+        "value": "nodejs18.x",
+      },
+      "eu-north-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-south-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-south-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-1": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-2": {
+        "value": "nodejs20.x",
+      },
+      "eu-west-3": {
+        "value": "nodejs20.x",
+      },
+      "il-central-1": {
+        "value": "nodejs20.x",
+      },
+      "me-central-1": {
+        "value": "nodejs20.x",
+      },
+      "me-south-1": {
+        "value": "nodejs20.x",
+      },
+      "mx-central-1": {
+        "value": "nodejs20.x",
+      },
+      "sa-east-1": {
+        "value": "nodejs20.x",
+      },
+      "us-east-1": {
+        "value": "nodejs20.x",
+      },
+      "us-east-2": {
+        "value": "nodejs20.x",
+      },
+      "us-gov-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-gov-west-1": {
+        "value": "nodejs18.x",
+      },
+      "us-iso-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-iso-west-1": {
+        "value": "nodejs18.x",
+      },
+      "us-isob-east-1": {
+        "value": "nodejs18.x",
+      },
+      "us-west-1": {
+        "value": "nodejs20.x",
+      },
+      "us-west-2": {
+        "value": "nodejs20.x",
+      },
+    },
+  },
+  "Outputs": {
+    "GitlabUrl": {
+      "Value": "https://gitlab.example.com",
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61arm64C96584B6F00A464EAD1953AFF4B05118Parameter": {
+      "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-arm64",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+    },
+  },
+  "Resources": {
+    "ComputingGitlabCluster7DAA5CDF": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "ClusterSettings": [
+          {
+            "Name": "containerInsights",
+            "Value": "enabled",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::Cluster",
+    },
+    "ComputingGitlabService3C9B31E1": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+        "LoadBalancerGitlabListener98BA0C09",
+        "SecurityEcsTaskRoleDefaultPolicy355E0789",
+        "SecurityEcsTaskRole1DF5BF23",
+      ],
+      "Properties": {
+        "Cluster": {
+          "Ref": "ComputingGitlabCluster7DAA5CDF",
+        },
+        "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50,
+        },
+        "DesiredCount": 1,
+        "EnableECSManagedTags": false,
+        "EnableExecuteCommand": true,
+        "HealthCheckGracePeriodSeconds": 540,
+        "LaunchType": "FARGATE",
+        "LoadBalancers": [
+          {
+            "ContainerName": "GitlabContainer",
+            "ContainerPort": 80,
+            "TargetGroupArn": {
+              "Ref": "LoadBalancerGitlabTargetGroupB54C6C44",
+            },
+          },
+        ],
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
+                  "ComputingGitlabServiceSecurityGroup37BF2DD2",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": [
+              {
+                "Ref": "NetworkPrivateSubnet1SubnetC4D46731",
+              },
+              {
+                "Ref": "NetworkPrivateSubnet2SubnetB345BF84",
+              },
+            ],
+          },
+        },
+        "TaskDefinition": {
+          "Ref": "ComputingGitlabTaskDefinitionF18CC27F",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "ComputingGitlabServiceSecurityGroup37BF2DD2": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+        "SecurityEcsTaskRoleDefaultPolicy355E0789",
+        "SecurityEcsTaskRole1DF5BF23",
+      ],
+      "Properties": {
+        "GroupDescription": "TestStack/Computing/GitlabService/SecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "ComputingGitlabServiceSecurityGroupfromTestStackLoadBalancerSecurityGroup799ECE5E80AF3B4F3C": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+        "SecurityEcsTaskRoleDefaultPolicy355E0789",
+        "SecurityEcsTaskRole1DF5BF23",
+      ],
+      "Properties": {
+        "Description": "Load balancer to target",
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "ComputingGitlabServiceSecurityGroup37BF2DD2",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerSecurityGroupA28D6DD7",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "ComputingGitlabTaskDefinitionExecutionRole50045F25": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ComputingGitlabTaskDefinitionExecutionRoleDefaultPolicy5E39E4A7": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "ComputingGitlabTaskDefinitionGitlabContainerLogGroup74D92C2E",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret",
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Ref": "Security2D46CA7F",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ComputingGitlabTaskDefinitionExecutionRoleDefaultPolicy5E39E4A7",
+        "Roles": [
+          {
+            "Ref": "ComputingGitlabTaskDefinitionExecutionRole50045F25",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ComputingGitlabTaskDefinitionF18CC27F": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "ContainerDefinitions": [
+          {
+            "Environment": [
+              {
+                "Name": "GITLAB_OMNIBUS_CONFIG",
+                "Value": "external_url 'https://gitlab.example.com'; nginx['listen_port'] = 80; nginx['listen_https'] = false;",
+              },
+            ],
+            "Essential": true,
+            "Image": "gitlab/gitlab-ce:17.5.0-ce.0",
+            "LogConfiguration": {
+              "LogDriver": "awslogs",
+              "Options": {
+                "awslogs-group": {
+                  "Ref": "ComputingGitlabTaskDefinitionGitlabContainerLogGroup74D92C2E",
+                },
+                "awslogs-region": {
+                  "Ref": "AWS::Region",
+                },
+                "awslogs-stream-prefix": "gitlab",
+              },
+            },
+            "MountPoints": [
+              {
+                "ContainerPath": "/var/opt/gitlab",
+                "ReadOnly": false,
+                "SourceVolume": "data",
+              },
+              {
+                "ContainerPath": "/var/log/gitlab",
+                "ReadOnly": false,
+                "SourceVolume": "logs",
+              },
+              {
+                "ContainerPath": "/etc/gitlab",
+                "ReadOnly": false,
+                "SourceVolume": "config",
+              },
+            ],
+            "Name": "GitlabContainer",
+            "PortMappings": [
+              {
+                "ContainerPort": 80,
+                "Protocol": "tcp",
+              },
+            ],
+            "Secrets": [
+              {
+                "Name": "GITLAB_ROOT_PASSWORD",
+                "ValueFrom": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Ref": "Security2D46CA7F",
+                      },
+                      ":password::",
+                    ],
+                  ],
+                },
+              },
+              {
+                "Name": "GITLAB_ROOT_EMAIL",
+                "ValueFrom": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Ref": "Security2D46CA7F",
+                      },
+                      ":email::",
+                    ],
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+        "Cpu": "2048",
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "ComputingGitlabTaskDefinitionExecutionRole50045F25",
+            "Arn",
+          ],
+        },
+        "Family": "TestStackComputingGitlabTaskDefinitionB1DE64A7",
+        "Memory": "6144",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": [
+          "FARGATE",
+        ],
+        "RuntimePlatform": {
+          "CpuArchitecture": "X86_64",
+        },
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
+            "SecurityEcsTaskRole1DF5BF23",
+            "Arn",
+          ],
+        },
+        "Volumes": [
+          {
+            "EFSVolumeConfiguration": {
+              "AuthorizationConfig": {
+                "IAM": "ENABLED",
+              },
+              "FilesystemId": {
+                "Ref": "Storage07F31EBC",
+              },
+              "RootDirectory": "/srv/gitlab/data",
+              "TransitEncryption": "ENABLED",
+            },
+            "Name": "data",
+          },
+          {
+            "EFSVolumeConfiguration": {
+              "AuthorizationConfig": {
+                "IAM": "ENABLED",
+              },
+              "FilesystemId": {
+                "Ref": "Storage07F31EBC",
+              },
+              "RootDirectory": "/srv/gitlab/logs",
+              "TransitEncryption": "ENABLED",
+            },
+            "Name": "logs",
+          },
+          {
+            "EFSVolumeConfiguration": {
+              "AuthorizationConfig": {
+                "IAM": "ENABLED",
+              },
+              "FilesystemId": {
+                "Ref": "Storage07F31EBC",
+              },
+              "RootDirectory": "/srv/gitlab/config",
+              "TransitEncryption": "ENABLED",
+            },
+            "Name": "config",
+          },
+        ],
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "ComputingGitlabTaskDefinitionGitlabContainerLogGroup74D92C2E": {
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "EfsInitLambda90361438": {
+      "DependsOn": [
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+        "NetworkIGW094D9CE3",
+        "NetworkNatSecurityGroup367EA520",
+        "NetworkPrivateSubnet1DefaultRouteA48B3017",
+        "NetworkPrivateSubnet1RouteTableC10F5F52",
+        "NetworkPrivateSubnet1RouteTableAssociation802B0CF2",
+        "NetworkPrivateSubnet1SubnetC4D46731",
+        "NetworkPrivateSubnet2DefaultRouteDF3F5474",
+        "NetworkPrivateSubnet2RouteTable23F12729",
+        "NetworkPrivateSubnet2RouteTableAssociation32F66B8A",
+        "NetworkPrivateSubnet2SubnetB345BF84",
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+        "NetworkPublicSubnet1NatInstanceE859F770",
+        "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet1Subnet5B78347B",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTable24240B23",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+        "NetworkPublicSubnet2SubnetC3758C96",
+        "Network1C6012B5",
+        "NetworkVPCGWDA581511",
+        "StorageEfsMountTarget1EB0DAD40",
+        "StorageEfsMountTarget261307A8C",
+        "StorageEfsSecurityGroupfromTestStackEfsInitLambdaSecurityGroupD7B9833B2049D67515E8",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "b85303461e4bbe9c304ea0f3e2f3b7534ba1583da0dfb52f40c55ffb34b11414.zip",
+        },
+        "Environment": {
+          "Variables": {
+            "EFS_ID": {
+              "Ref": "Storage07F31EBC",
+            },
+          },
+        },
+        "FileSystemConfigs": [
+          {
+            "Arn": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:",
+                  {
+                    "Ref": "AWS::Partition",
+                  },
+                  ":elasticfilesystem:",
+                  {
+                    "Ref": "AWS::Region",
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":access-point/",
+                  {
+                    "Ref": "StorageLambdaAccessPointB3471C5C",
+                  },
+                ],
+              ],
+            },
+            "LocalMountPath": "/mnt/efs",
+          },
+        ],
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "EfsInitLambdaServiceRoleBFEBCCD5",
+            "Arn",
+          ],
+        },
+        "Runtime": "python3.9",
+        "Timeout": 60,
+        "VpcConfig": {
+          "SecurityGroupIds": [
+            {
+              "Fn::GetAtt": [
+                "EfsInitLambdaSecurityGroupB92B6A9F",
+                "GroupId",
+              ],
+            },
+          ],
+          "SubnetIds": [
+            {
+              "Ref": "NetworkPrivateSubnet1SubnetC4D46731",
+            },
+            {
+              "Ref": "NetworkPrivateSubnet2SubnetB345BF84",
+            },
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "EfsInitLambdaEfsInitProviderframeworkonEvent2588C91A": {
+      "DependsOn": [
+        "EfsInitLambdaEfsInitProviderframeworkonEventServiceRoleDefaultPolicy8E797117",
+        "EfsInitLambdaEfsInitProviderframeworkonEventServiceRole39DEDC8D",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "4dc48ffba382f93077a1e6824599bbd4ceb6f91eb3d9442eca3b85bdb1a20b1e.zip",
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (TestStack/EfsInitLambda/EfsInitProvider)",
+        "Environment": {
+          "Variables": {
+            "USER_ON_EVENT_FUNCTION_ARN": {
+              "Fn::GetAtt": [
+                "EfsInitLambda90361438",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": {
+          "Fn::GetAtt": [
+            "EfsInitLambdaEfsInitProviderframeworkonEventServiceRole39DEDC8D",
+            "Arn",
+          ],
+        },
+        "Runtime": {
+          "Fn::FindInMap": [
+            "LatestNodeRuntimeMap",
+            {
+              "Ref": "AWS::Region",
+            },
+            "value",
+          ],
+        },
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "EfsInitLambdaEfsInitProviderframeworkonEventLogRetention1C3F42A3": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
+            "",
+            [
+              "/aws/lambda/",
+              {
+                "Ref": "EfsInitLambdaEfsInitProviderframeworkonEvent2588C91A",
+              },
+            ],
+          ],
+        },
+        "RetentionInDays": 7,
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "Custom::LogRetention",
+    },
+    "EfsInitLambdaEfsInitProviderframeworkonEventServiceRole39DEDC8D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EfsInitLambdaEfsInitProviderframeworkonEventServiceRoleDefaultPolicy8E797117": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "EfsInitLambda90361438",
+                    "Arn",
+                  ],
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "EfsInitLambda90361438",
+                          "Arn",
+                        ],
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EfsInitLambdaEfsInitProviderframeworkonEventServiceRoleDefaultPolicy8E797117",
+        "Roles": [
+          {
+            "Ref": "EfsInitLambdaEfsInitProviderframeworkonEventServiceRole39DEDC8D",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "EfsInitLambdaEfsInitializer8FE55E4F": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "EfsInitLambdaEfsInitProviderframeworkonEvent2588C91A",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "EfsInitLambdaSecurityGroupB92B6A9F": {
+      "DependsOn": [
+        "NetworkIGW094D9CE3",
+        "NetworkNatSecurityGroup367EA520",
+        "NetworkPrivateSubnet1DefaultRouteA48B3017",
+        "NetworkPrivateSubnet1RouteTableC10F5F52",
+        "NetworkPrivateSubnet1RouteTableAssociation802B0CF2",
+        "NetworkPrivateSubnet1SubnetC4D46731",
+        "NetworkPrivateSubnet2DefaultRouteDF3F5474",
+        "NetworkPrivateSubnet2RouteTable23F12729",
+        "NetworkPrivateSubnet2RouteTableAssociation32F66B8A",
+        "NetworkPrivateSubnet2SubnetB345BF84",
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+        "NetworkPublicSubnet1NatInstanceE859F770",
+        "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet1Subnet5B78347B",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTable24240B23",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+        "NetworkPublicSubnet2SubnetC3758C96",
+        "Network1C6012B5",
+        "NetworkVPCGWDA581511",
+        "StorageEfsMountTarget1EB0DAD40",
+        "StorageEfsMountTarget261307A8C",
+      ],
+      "Properties": {
+        "GroupDescription": "Automatic security group for Lambda Function TestStackEfsInitLambdaE22CB6A5",
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7": {
+      "DependsOn": [
+        "NetworkIGW094D9CE3",
+        "NetworkNatSecurityGroup367EA520",
+        "NetworkPrivateSubnet1DefaultRouteA48B3017",
+        "NetworkPrivateSubnet1RouteTableC10F5F52",
+        "NetworkPrivateSubnet1RouteTableAssociation802B0CF2",
+        "NetworkPrivateSubnet1SubnetC4D46731",
+        "NetworkPrivateSubnet2DefaultRouteDF3F5474",
+        "NetworkPrivateSubnet2RouteTable23F12729",
+        "NetworkPrivateSubnet2RouteTableAssociation32F66B8A",
+        "NetworkPrivateSubnet2SubnetB345BF84",
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+        "NetworkPublicSubnet1NatInstanceE859F770",
+        "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet1Subnet5B78347B",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTable24240B23",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+        "NetworkPublicSubnet2SubnetC3758C96",
+        "Network1C6012B5",
+        "NetworkVPCGWDA581511",
+        "StorageEfsMountTarget1EB0DAD40",
+        "StorageEfsMountTarget261307A8C",
+      ],
+      "Properties": {
+        "Description": "to TestStackStorageEfsSecurityGroupE865AC7E:2049",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "StorageEfsSecurityGroup9427CBC1",
+            "GroupId",
+          ],
+        },
+        "FromPort": 2049,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "EfsInitLambdaSecurityGroupB92B6A9F",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 2049,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "EfsInitLambdaServiceRoleBFEBCCD5": {
+      "DependsOn": [
+        "NetworkIGW094D9CE3",
+        "NetworkNatSecurityGroup367EA520",
+        "NetworkPrivateSubnet1DefaultRouteA48B3017",
+        "NetworkPrivateSubnet1RouteTableC10F5F52",
+        "NetworkPrivateSubnet1RouteTableAssociation802B0CF2",
+        "NetworkPrivateSubnet1SubnetC4D46731",
+        "NetworkPrivateSubnet2DefaultRouteDF3F5474",
+        "NetworkPrivateSubnet2RouteTable23F12729",
+        "NetworkPrivateSubnet2RouteTableAssociation32F66B8A",
+        "NetworkPrivateSubnet2SubnetB345BF84",
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+        "NetworkPublicSubnet1NatInstanceE859F770",
+        "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet1Subnet5B78347B",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTable24240B23",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+        "NetworkPublicSubnet2SubnetC3758C96",
+        "Network1C6012B5",
+        "NetworkVPCGWDA581511",
+        "StorageEfsMountTarget1EB0DAD40",
+        "StorageEfsMountTarget261307A8C",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0": {
+      "DependsOn": [
+        "NetworkIGW094D9CE3",
+        "NetworkNatSecurityGroup367EA520",
+        "NetworkPrivateSubnet1DefaultRouteA48B3017",
+        "NetworkPrivateSubnet1RouteTableC10F5F52",
+        "NetworkPrivateSubnet1RouteTableAssociation802B0CF2",
+        "NetworkPrivateSubnet1SubnetC4D46731",
+        "NetworkPrivateSubnet2DefaultRouteDF3F5474",
+        "NetworkPrivateSubnet2RouteTable23F12729",
+        "NetworkPrivateSubnet2RouteTableAssociation32F66B8A",
+        "NetworkPrivateSubnet2SubnetB345BF84",
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+        "NetworkPublicSubnet1NatInstanceE859F770",
+        "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet1Subnet5B78347B",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTable24240B23",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+        "NetworkPublicSubnet2SubnetC3758C96",
+        "Network1C6012B5",
+        "NetworkVPCGWDA581511",
+        "StorageEfsMountTarget1EB0DAD40",
+        "StorageEfsMountTarget261307A8C",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "elasticfilesystem:ClientMount",
+              "Condition": {
+                "StringEquals": {
+                  "elasticfilesystem:AccessPointArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":elasticfilesystem:",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":access-point/",
+                        {
+                          "Ref": "StorageLambdaAccessPointB3471C5C",
+                        },
+                      ],
+                    ],
+                  },
+                },
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "elasticfilesystem:ClientWrite",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":elasticfilesystem:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":file-system/",
+                    {
+                      "Ref": "Storage07F31EBC",
+                    },
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "Roles": [
+          {
+            "Ref": "EfsInitLambdaServiceRoleBFEBCCD5",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "LoadBalancerBE9EEC3A": {
+      "DependsOn": [
+        "NetworkPublicSubnet1DefaultRoute1E5C22EC",
+        "NetworkPublicSubnet1RouteTableAssociation870BDE42",
+        "NetworkPublicSubnet2DefaultRoute2449ACD0",
+        "NetworkPublicSubnet2RouteTableAssociation1FAB434D",
+      ],
+      "Properties": {
+        "LoadBalancerAttributes": [
+          {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "LoadBalancerSecurityGroupA28D6DD7",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": [
+          {
+            "Ref": "NetworkPublicSubnet1Subnet5B78347B",
+          },
+          {
+            "Ref": "NetworkPublicSubnet2SubnetC3758C96",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "LoadBalancerGitlabCertificate9317AE06": {
+      "Properties": {
+        "DomainName": "gitlab.example.com",
+        "DomainValidationOptions": [
+          {
+            "DomainName": "gitlab.example.com",
+            "HostedZoneId": "Z0123456789ABCDEFG",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/LoadBalancer/GitlabCertificate",
+          },
+        ],
+        "ValidationMethod": "DNS",
+      },
+      "Type": "AWS::CertificateManager::Certificate",
+    },
+    "LoadBalancerGitlabDnsRecordD13198AB": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::Join": [
+              "",
+              [
+                "dualstack.",
+                {
+                  "Fn::GetAtt": [
+                    "LoadBalancerBE9EEC3A",
+                    "DNSName",
+                  ],
+                },
+              ],
+            ],
+          },
+          "HostedZoneId": {
+            "Fn::GetAtt": [
+              "LoadBalancerBE9EEC3A",
+              "CanonicalHostedZoneID",
+            ],
+          },
+        },
+        "HostedZoneId": "Z0123456789ABCDEFG",
+        "Name": "gitlab.example.com.",
+        "Type": "A",
+      },
+      "Type": "AWS::Route53::RecordSet",
+    },
+    "LoadBalancerGitlabListener98BA0C09": {
+      "Properties": {
+        "Certificates": [
+          {
+            "CertificateArn": {
+              "Ref": "LoadBalancerGitlabCertificate9317AE06",
+            },
+          },
+        ],
+        "DefaultActions": [
+          {
+            "TargetGroupArn": {
+              "Ref": "LoadBalancerGitlabTargetGroupB54C6C44",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": {
+          "Ref": "LoadBalancerBE9EEC3A",
+        },
+        "Port": 443,
+        "Protocol": "HTTPS",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "LoadBalancerGitlabTargetGroupB54C6C44": {
+      "Properties": {
+        "HealthCheckPath": "/users/sign_in",
+        "HealthCheckPort": "80",
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetGroupAttributes": [
+          {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
+        "TargetType": "ip",
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "LoadBalancerSecurityGroupA28D6DD7": {
+      "Properties": {
+        "GroupDescription": "Automatically created Security Group for ELB TestStackLoadBalancer567F3FE0",
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:443",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "LoadBalancerSecurityGrouptoTestStackComputingGitlabServiceSecurityGroup2CF8872F8028CA0F37": {
+      "Properties": {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ComputingGitlabServiceSecurityGroup37BF2DD2",
+            "GroupId",
+          ],
+        },
+        "FromPort": 80,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "LoadBalancerSecurityGroupA28D6DD7",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      ],
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip",
+        },
+        "Handler": "index.handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "Arn",
+          ],
+        },
+        "Runtime": {
+          "Fn::FindInMap": [
+            "LatestNodeRuntimeMap",
+            {
+              "Ref": "AWS::Region",
+            },
+            "value",
+          ],
+        },
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "logs:PutRetentionPolicy",
+                "logs:DeleteRetentionPolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+        "Roles": [
+          {
+            "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "Network1C6012B5": {
+      "Properties": {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "NetworkIGW094D9CE3": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "NetworkNatSecurityGroup367EA520": {
+      "Properties": {
+        "GroupDescription": "Security Group for NAT instances",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "SecurityGroupIngress": [
+          {
+            "CidrIp": {
+              "Fn::GetAtt": [
+                "Network1C6012B5",
+                "CidrBlock",
+              ],
+            },
+            "Description": "Allow HTTPS from VPC",
+            "FromPort": 443,
+            "IpProtocol": "tcp",
+            "ToPort": 443,
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "NetworkPrivateSubnet1DefaultRouteA48B3017": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": {
+          "Ref": "NetworkPublicSubnet1NatInstanceE859F770",
+        },
+        "RouteTableId": {
+          "Ref": "NetworkPrivateSubnet1RouteTableC10F5F52",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "NetworkPrivateSubnet1RouteTableAssociation802B0CF2": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "NetworkPrivateSubnet1RouteTableC10F5F52",
+        },
+        "SubnetId": {
+          "Ref": "NetworkPrivateSubnet1SubnetC4D46731",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "NetworkPrivateSubnet1RouteTableC10F5F52": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "NetworkPrivateSubnet1SubnetC4D46731": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PrivateSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "NetworkPrivateSubnet2DefaultRouteDF3F5474": {
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": {
+          "Ref": "NetworkPublicSubnet1NatInstanceE859F770",
+        },
+        "RouteTableId": {
+          "Ref": "NetworkPrivateSubnet2RouteTable23F12729",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "NetworkPrivateSubnet2RouteTable23F12729": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "NetworkPrivateSubnet2RouteTableAssociation32F66B8A": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "NetworkPrivateSubnet2RouteTable23F12729",
+        },
+        "SubnetId": {
+          "Ref": "NetworkPrivateSubnet2SubnetB345BF84",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "NetworkPrivateSubnet2SubnetB345BF84": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PrivateSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "NetworkPublicSubnet1DefaultRoute1E5C22EC": {
+      "DependsOn": [
+        "NetworkVPCGWDA581511",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "NetworkIGW094D9CE3",
+        },
+        "RouteTableId": {
+          "Ref": "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "NetworkPublicSubnet1NatInstanceE859F770": {
+      "DependsOn": [
+        "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+      ],
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "IamInstanceProfile": {
+          "Ref": "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE",
+        },
+        "ImageId": {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61arm64C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "t4g.nano",
+        "SecurityGroupIds": [
+          {
+            "Fn::GetAtt": [
+              "NetworkNatSecurityGroup367EA520",
+              "GroupId",
+            ],
+          },
+        ],
+        "SourceDestCheck": false,
+        "SubnetId": {
+          "Ref": "NetworkPublicSubnet1Subnet5B78347B",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet1/NatInstance",
+          },
+        ],
+        "UserData": {
+          "Fn::Base64": "#!/bin/bash
+yum install iptables-services -y
+systemctl enable iptables
+systemctl start iptables
+echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/custom-ip-forwarding.conf
+sudo sysctl -p /etc/sysctl.d/custom-ip-forwarding.conf
+sudo /sbin/iptables -t nat -A POSTROUTING -o $(route | awk '/^default/{print $NF}') -j MASQUERADE
+sudo /sbin/iptables -F FORWARD
+sudo service iptables save",
+        },
+      },
+      "Type": "AWS::EC2::Instance",
+    },
+    "NetworkPublicSubnet1NatInstanceInstanceProfileF88843EE": {
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "NetworkPublicSubnet1NatInstanceInstanceRoleE4F1E72A": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ec2.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet1/NatInstance",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "NetworkPublicSubnet1RouteTable1F8DA2C6": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "NetworkPublicSubnet1RouteTableAssociation870BDE42": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "NetworkPublicSubnet1RouteTable1F8DA2C6",
+        },
+        "SubnetId": {
+          "Ref": "NetworkPublicSubnet1Subnet5B78347B",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "NetworkPublicSubnet1Subnet5B78347B": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet1",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "NetworkPublicSubnet2DefaultRoute2449ACD0": {
+      "DependsOn": [
+        "NetworkVPCGWDA581511",
+      ],
+      "Properties": {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": {
+          "Ref": "NetworkIGW094D9CE3",
+        },
+        "RouteTableId": {
+          "Ref": "NetworkPublicSubnet2RouteTable24240B23",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "NetworkPublicSubnet2RouteTable24240B23": {
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "NetworkPublicSubnet2RouteTableAssociation1FAB434D": {
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "NetworkPublicSubnet2RouteTable24240B23",
+        },
+        "SubnetId": {
+          "Ref": "NetworkPublicSubnet2SubnetC3758C96",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "NetworkPublicSubnet2SubnetC3758C96": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          {
+            "Key": "Name",
+            "Value": "TestStack/Network/Default/PublicSubnet2",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "NetworkVPCGWDA581511": {
+      "Properties": {
+        "InternetGatewayId": {
+          "Ref": "NetworkIGW094D9CE3",
+        },
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+    "Security2D46CA7F": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "Description": "Gitlab root credentials",
+        "GenerateSecretString": {
+          "GenerateStringKey": "password",
+          "SecretStringTemplate": "{"email":"admin@example.com"}",
+        },
+      },
+      "Type": "AWS::SecretsManager::Secret",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "SecurityEcsTaskRole1DF5BF23": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "SecurityEcsTaskRoleDefaultPolicy355E0789": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite",
+                "elasticfilesystem:ClientRootAccess",
+              ],
+              "Condition": {
+                "Bool": {
+                  "elasticfilesystem:AccessedViaMountTarget": "true",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "Storage07F31EBC",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite",
+              ],
+              "Condition": {
+                "Bool": {
+                  "elasticfilesystem:AccessedViaMountTarget": "true",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "Storage07F31EBC",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:CreateControlChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "logs:DescribeLogGroups",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "SecurityEcsTaskRoleDefaultPolicy355E0789",
+        "Roles": [
+          {
+            "Ref": "SecurityEcsTaskRole1DF5BF23",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "Storage07F31EBC": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "BackupPolicy": {
+          "Status": "ENABLED",
+        },
+        "Encrypted": true,
+        "FileSystemPolicy": {
+          "Statement": [
+            {
+              "Action": [
+                "elasticfilesystem:ClientWrite",
+                "elasticfilesystem:ClientRootAccess",
+              ],
+              "Condition": {
+                "Bool": {
+                  "elasticfilesystem:AccessedViaMountTarget": "true",
+                },
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "*",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "FileSystemTags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Storage/Default",
+          },
+        ],
+      },
+      "Type": "AWS::EFS::FileSystem",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "StorageEfsMountTarget1EB0DAD40": {
+      "Properties": {
+        "FileSystemId": {
+          "Ref": "Storage07F31EBC",
+        },
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "StorageEfsSecurityGroup9427CBC1",
+              "GroupId",
+            ],
+          },
+        ],
+        "SubnetId": {
+          "Ref": "NetworkPrivateSubnet1SubnetC4D46731",
+        },
+      },
+      "Type": "AWS::EFS::MountTarget",
+    },
+    "StorageEfsMountTarget261307A8C": {
+      "Properties": {
+        "FileSystemId": {
+          "Ref": "Storage07F31EBC",
+        },
+        "SecurityGroups": [
+          {
+            "Fn::GetAtt": [
+              "StorageEfsSecurityGroup9427CBC1",
+              "GroupId",
+            ],
+          },
+        ],
+        "SubnetId": {
+          "Ref": "NetworkPrivateSubnet2SubnetB345BF84",
+        },
+      },
+      "Type": "AWS::EFS::MountTarget",
+    },
+    "StorageEfsSecurityGroup9427CBC1": {
+      "Properties": {
+        "GroupDescription": "TestStack/Storage/Default/EfsSecurityGroup",
+        "SecurityGroupEgress": [
+          {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Storage/Default",
+          },
+        ],
+        "VpcId": {
+          "Ref": "Network1C6012B5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "StorageEfsSecurityGroupfromTestStackComputingGitlabServiceSecurityGroup2CF8872F20498350EF5A": {
+      "Properties": {
+        "Description": "Allow inbound NFS traffic from ECS",
+        "FromPort": 2049,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "StorageEfsSecurityGroup9427CBC1",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ComputingGitlabServiceSecurityGroup37BF2DD2",
+            "GroupId",
+          ],
+        },
+        "ToPort": 2049,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "StorageEfsSecurityGroupfromTestStackEfsInitLambdaSecurityGroupD7B9833B2049D67515E8": {
+      "Properties": {
+        "Description": "from TestStackEfsInitLambdaSecurityGroupD7B9833B:2049",
+        "FromPort": 2049,
+        "GroupId": {
+          "Fn::GetAtt": [
+            "StorageEfsSecurityGroup9427CBC1",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "EfsInitLambdaSecurityGroupB92B6A9F",
+            "GroupId",
+          ],
+        },
+        "ToPort": 2049,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "StorageLambdaAccessPointB3471C5C": {
+      "Properties": {
+        "AccessPointTags": [
+          {
+            "Key": "Name",
+            "Value": "TestStack/Storage/Default/LambdaAccessPoint",
+          },
+        ],
+        "FileSystemId": {
+          "Ref": "Storage07F31EBC",
+        },
+        "PosixUser": {
+          "Gid": "0",
+          "Uid": "0",
+        },
+        "RootDirectory": {
+          "CreationInfo": {
+            "OwnerGid": "0",
+            "OwnerUid": "0",
+            "Permissions": "755",
+          },
+          "Path": "/",
+        },
+      },
+      "Type": "AWS::EFS::AccessPoint",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
