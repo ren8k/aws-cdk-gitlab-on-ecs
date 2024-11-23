@@ -1,11 +1,23 @@
 # AWS CloudShell を利用したデプロイ方法
 
-## CloudShell の起動
+CloudShell には，AWS CDK がプリインストールされているため，容易にデプロイを行うことができます．
 
-wget https://raw.githubusercontent.com/ren8k/aws-cdk-ecs-gitlab/refs/heads/main/deploy.sh?token=GHSAT0AAAAAACMQLN5SGSXRTICKUZ4JJ7SEZZZ5DQA -O deploy.sh
+## deploy.sh のダウンロードと実行権限の付与
+
+[CloudShell](https://console.aws.amazon.com/cloudshell/home) を起動し，以下のコマンドを実行します．
+
+```
+wget https://raw.githubusercontent.com/ren8k/aws-cdk-gitlab-on-ecs/refs/heads/main/deploy.sh -O deploy.sh
 chmod +x deploy.sh
+```
 
-一時的な不具合で，`500: We're sorry, something went wrong on our end` が出た場合，再度デプロイするか，ECS タスクの再デプロイを行ってください．
+## デプロイ
 
-wget https://raw.githubusercontent.com/ren8k/aws-ec2-devkit-vscode
-/refs/heads/main/README.md -O README.md
+`deploy.sh` を実行します．
+
+```
+./deploy.sh
+```
+
+> [!CAUTION]
+> 2024/11/23 時点で，本リポジトリの利用にかかわらず，CloudShell 上で `npm ci` を実行すると実行が終了しない事象が発生しています．原因が判明次第，追記する予定です．
