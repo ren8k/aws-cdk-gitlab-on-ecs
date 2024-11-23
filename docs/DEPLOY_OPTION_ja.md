@@ -1,6 +1,29 @@
 # デプロイオプション
 
-## 新しい VPC を作成し，VPC の CIDR と NAT インスタンスを指定する場合
+`bin/aws-cdk-gitlab-on-ecs.ts` を編集することで，デプロイオプションを指定することができます．以降に紹介するオプションを組み合わせることも可能です．
+
+## ALB にアクセス可能な IP レンジを指定する場合
+
+以下のように，`allowedCidrs` を指定して下さい．
+
+```typescript
+#!/usr/bin/env node
+import "source-map-support/register";
+import * as cdk from "aws-cdk-lib";
+import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
+
+const app = new cdk.App();
+
+new GitlabServerlessStack(app, "GitlabServerlessStack", {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  },
+  allowedCidrs: ["1.1.1.1/16", "2.2.2.2/16"],
+});
+```
+
+## 新規作成する VPC の CIDR の指定や， NAT インスタンスを利用する場合
 
 以下のように，`vpcCidr` と `useNatInstance` を指定して下さい．
 
@@ -81,7 +104,7 @@ new GitlabServerlessStack(app, "GitlabServerlessStack", {
 });
 ```
 
-## Gitlab のバージョン指定，email 指定する場合
+## Gitlab のバージョン指定，管理者の email 指定する場合
 
 以下のように，`gitlabRootEmail`，`gitlabImageTag` を指定して下さい．
 
