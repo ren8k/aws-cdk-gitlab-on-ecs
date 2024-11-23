@@ -1,5 +1,8 @@
 # GitLab Deployment Using AWS CDK
 
+> Note
+> 日本語ドキュメントは[こちら](./README_ja.md)にあります。
+
 Self-host [GitLab](https://about.gitlab.com/) on AWS managed services using AWS CDK as an alternative to CodeCommit.
 
 ![architecture](./assets/gitlab_architecture.png)
