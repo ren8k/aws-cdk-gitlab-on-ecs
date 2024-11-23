@@ -1,6 +1,6 @@
 # AWS CloudShell を利用したデプロイ方法
 
-CloudShell には，AWS CDK がプリインストールされているため，容易にデプロイを行うことができます．試しにデプロイしてみたい場合にご利用下さい．
+CloudShell には，AWS CLI や AWS CDK がプリインストールされているため，容易にデプロイを行うことができます．試しにデプロイしてみたい場合にご利用下さい．
 
 ## deploy.sh のダウンロードと実行権限の付与
 
@@ -13,7 +13,7 @@ chmod +x deploy.sh
 
 ## デプロイ
 
-以下のコマンドを実行します．なお，デプロイ時の IP アドレス制限や VPC の CIDR 等の設定を行いたい場合，以下のコマンドを実行せず，本リポジトリを clone し，vi などで`bin/aws-cdk-gitlab-on-ecs.ts`を編集した後，`cdk deploy` を実行してください．
+以下のコマンドを実行します．なお，デプロイ時の IP アドレス制限や VPC の CIDR 等の設定を行いたい場合，以下のコマンドを実行せず，本リポジトリを clone 後，[README.md](../README.md/#デプロイ)に記載のデプロイ手順に従って下さい．
 
 ```sh
 export UV_USE_IO_URING=0

@@ -24,7 +24,7 @@ CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gi
 
 ## デプロイ
 
-> [!TIP]
+> [!IMPORTANT]
 > デプロイ時のパラメータの設定方法については，[こちら](./docs/DEPLOY_OPTION_ja.md)を参照してください．
 
 > [!TIP]
