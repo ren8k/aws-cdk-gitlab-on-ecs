@@ -15,8 +15,8 @@ export interface LoadBalancerProps {
 }
 
 export class LoadBalancer extends Construct {
-    public readonly alb: elbv2.ApplicationLoadBalancer;
-    public readonly targetGroup: elbv2.ApplicationTargetGroup;
+    public readonly alb: elbv2.IApplicationLoadBalancer;
+    public readonly targetGroup: elbv2.IApplicationTargetGroup;
     public readonly url: string;
 
     constructor(scope: Construct, id: string, props: LoadBalancerProps) {
