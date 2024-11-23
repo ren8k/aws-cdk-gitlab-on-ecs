@@ -32,7 +32,7 @@ CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gi
 
 `bin/aws-cdk-gitlab-on-ecs.ts` を編集することで，AWS リージョンなどの設定パラメータを調整できます．利用可能なすべてのパラメータについては [`GitlabServerlessStackProps`](./lib/aws-cdk-gitlab-on-ecs-stack.ts) インターフェースも確認してください．
 
-その後，以下のコマンドを実行してスタック全体をデプロイできます．
+その後，以下のコマンドを実行してスタック全体をデプロイできます．なお，コマンドはリポジトリのルートで実行してください．
 
 ```sh
 # install npm dependencies
