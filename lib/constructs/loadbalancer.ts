@@ -6,12 +6,12 @@ import * as route53targets from "aws-cdk-lib/aws-route53-targets";
 import { Construct } from "constructs";
 
 export interface LoadBalancerProps {
-    vpc: ec2.IVpc;
-    allowedCidrs: string[];
-    domainName?: string;
-    subDomain?: string;
-    hostedZoneId?: string;
-    useHttps: boolean;
+    readonly vpc: ec2.IVpc;
+    readonly allowedCidrs: string[];
+    readonly domainName?: string;
+    readonly subDomain?: string;
+    readonly hostedZoneId?: string;
+    readonly useHttps: boolean;
 }
 
 export class LoadBalancer extends Construct {

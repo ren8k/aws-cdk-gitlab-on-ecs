@@ -7,8 +7,8 @@ import * as logs from "aws-cdk-lib/aws-logs";
 import { Construct } from "constructs";
 
 export interface EfsInitLambdaProps {
-    vpc: ec2.IVpc;
-    fileSystem: efs.FileSystem;
+    readonly vpc: ec2.IVpc;
+    readonly fileSystem: efs.FileSystem;
 }
 
 export class EfsInitLambda extends Construct {

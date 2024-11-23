@@ -4,7 +4,7 @@ import * as efs from "aws-cdk-lib/aws-efs";
 import { Construct } from "constructs";
 
 export interface StorageProps {
-    vpc: ec2.IVpc;
+    readonly vpc: ec2.IVpc;
 }
 
 export class Storage extends Construct {

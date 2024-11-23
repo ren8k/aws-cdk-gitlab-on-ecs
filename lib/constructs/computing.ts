@@ -8,14 +8,14 @@ import * as efs from "aws-cdk-lib/aws-efs";
 import { Construct } from "constructs";
 
 export interface ComputingProps {
-    vpc: ec2.IVpc;
-    taskRole: iam.IRole;
-    fileSystem: efs.IFileSystem;
-    targetGroup: elbv2.IApplicationTargetGroup;
-    gitlabSecret: secretsmanager.ISecret;
-    gitlabImageTag: string;
-    externalUrl: string;
-    useHttps: boolean;
+    readonly vpc: ec2.IVpc;
+    readonly taskRole: iam.IRole;
+    readonly fileSystem: efs.IFileSystem;
+    readonly targetGroup: elbv2.IApplicationTargetGroup;
+    readonly gitlabSecret: secretsmanager.ISecret;
+    readonly gitlabImageTag: string;
+    readonly externalUrl: string;
+    readonly useHttps: boolean;
 }
 
 export class Computing extends Construct {

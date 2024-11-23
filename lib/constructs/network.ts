@@ -2,9 +2,9 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
 
 export interface NetworkProps {
-    vpcCidr?: string;
-    useNatInstance?: boolean;
-    vpcId?: string;
+    readonly vpcCidr?: string;
+    readonly useNatInstance?: boolean;
+    readonly vpcId?: string;
 }
 
 export class Network extends Construct {

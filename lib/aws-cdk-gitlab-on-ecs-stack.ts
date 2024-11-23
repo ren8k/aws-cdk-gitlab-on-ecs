@@ -13,14 +13,14 @@ export interface GitlabServerlessStackProps extends cdk.StackProps {
    * You can restrict access to specific IP ranges for security.
    * @example ["1.1.1.1/32", "2.2.2.2/24"]
    */
-  allowedCidrs: string[];
+  readonly allowedCidrs: string[];
 
   /**
    * The CIDR block for the VPC where GitLab will be deployed.
    * Ignored when you import an existing VPC.
    * @example "10.0.0.0/16"
    */
-  vpcCidr?: string;
+  readonly vpcCidr?: string;
 
   /**
    * Use t4g.nano NAT instances instead of NAT Gateway.
@@ -28,21 +28,21 @@ export interface GitlabServerlessStackProps extends cdk.StackProps {
    * Ignored when you import an existing VPC.
    * @default false
    */
-  useNatInstance?: boolean;
+  readonly useNatInstance?: boolean;
 
   /**
    * If set, it imports the existing VPC instead of creating a new one.
    * The VPC must have public and private subnets.
    * @default create a new VPC
    */
-  vpcId?: string;
+  readonly vpcId?: string;
 
   /**
    * The domain name for GitLab's service URL.
    * You must own a Route53 public hosted zone for the domain in your account.
    * @default undefined - No custom domain is used
    */
-  domainName?: string;
+  readonly domainName?: string;
 
   /**
    * The subdomain to use for GitLab.
@@ -50,21 +50,21 @@ export interface GitlabServerlessStackProps extends cdk.StackProps {
    * @example "gitlab" will result in "gitlab.yourdomain.com"
    * @default undefined
    */
-  subDomain?: string;
+  readonly subDomain?: string;
 
   /**
    * The ID of Route53 hosted zone for the domain.
    * Required if domainName is specified.
    * @default undefined
    */
-  hostedZoneId?: string;
+  readonly hostedZoneId?: string;
 
   /**
    * The email address for the GitLab root user.
    * This will be used to create the initial admin account.
    * @default "admin@example.com"
    */
-  gitlabRootEmail?: string;
+  readonly gitlabRootEmail?: string;
 
   /**
    * The version tag of the GitLab container image to deploy.
@@ -72,7 +72,7 @@ export interface GitlabServerlessStackProps extends cdk.StackProps {
    * @example "17.5.0-ce.0"
    * @default "latest"
    */
-  gitlabImageTag?: string;
+  readonly gitlabImageTag?: string;
 }
 
 export class GitlabServerlessStack extends cdk.Stack {

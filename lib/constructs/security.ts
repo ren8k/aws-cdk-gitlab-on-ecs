@@ -4,8 +4,8 @@ import * as efs from "aws-cdk-lib/aws-efs";
 import { Construct } from "constructs";
 
 export interface SecurityProps {
-    gitlabRootEmail: string;
-    fileSystem: efs.IFileSystem;
+    readonly gitlabRootEmail: string;
+    readonly fileSystem: efs.IFileSystem;
 }
 
 export class Security extends Construct {
