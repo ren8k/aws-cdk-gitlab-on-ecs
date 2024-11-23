@@ -74,8 +74,9 @@ npx cdk destroy --force
 
 本 CDK の実装を行うにあたり，以下のリポジトリや資料を参考にさせていただきました．
 
-- https://github.com/aws-samples/dify-self-hosted-on-aws/
-- https://speakerdeck.com/konokenj/cdk-best-practice-2024
-- https://speakerdeck.com/tmokmss/answering-cdk-faqs
-- https://aws.amazon.com/jp/builders-flash/202411/learn-cdk-unit-test/
-- https://aws.amazon.com/jp/blogs/news/best-practices-for-developing-cloud-applications-with-aws-cdk/
+- [aws-samples/dify-self-hosted-on-aws](https://github.com/aws-samples/dify-self-hosted-on-aws)
+- [aws-samples/generative-ai-use-cases-jp](https://github.com/aws-samples/generative-ai-use-cases-jp)
+- [初心者がおさえておきたい AWS CDK のベストプラクティス 2024](https://speakerdeck.com/konokenj/cdk-best-practice-2024)
+- [AWS CDK のあるあるお悩みに答えたい](https://speakerdeck.com/tmokmss/answering-cdk-faqs)
+- [AWS CDK における単体テストの使い所を学ぶ](https://aws.amazon.com/jp/builders-flash/202411/learn-cdk-unit-test/)
+- [AWS CDK でクラウドアプリケーションを開発するためのベストプラクティス](https://aws.amazon.com/jp/blogs/news/best-practices-for-developing-cloud-applications-with-aws-cdk/)
