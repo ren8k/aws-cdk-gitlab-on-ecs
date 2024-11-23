@@ -6,7 +6,7 @@ CloudShell には，AWS CDK がプリインストールされているため，�
 
 [CloudShell](https://console.aws.amazon.com/cloudshell/home) を起動し，以下のコマンドを実行します．
 
-```
+```sh
 wget https://raw.githubusercontent.com/ren8k/aws-cdk-gitlab-on-ecs/refs/heads/main/deploy.sh -O deploy.sh
 chmod +x deploy.sh
 ```
@@ -15,7 +15,7 @@ chmod +x deploy.sh
 
 `deploy.sh` を実行します．
 
-```
+```sh
 ./deploy.sh
 ```
 

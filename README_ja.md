@@ -24,17 +24,17 @@ CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gi
 
 ## デプロイ
 
-> [!IMPORTANT]
-> CloudShell でデプロイする場合は，[こちら](./docs/DEPLOY_ON_CLOUDSHELL_ja.md)を参照してください．
-
 > [!TIP]
 > デプロイ時のパラメータの設定方法については，[こちら](./docs/DEPLOY_OPTION_ja.md)を参照してください．
 
-`bin/aws-cdk-gitlab-on-ecs.ts` を編集することで，AWS リージョンなどの設定パラメータを調整できます．利用可能なすべてのパラメータについては `GitlabServerlessStackProps` インターフェースも確認してください．
+> [!TIP]
+> CloudShell でデプロイする場合は，[こちら](./docs/DEPLOY_ON_CLOUDSHELL_ja.md)を参照してください．
+
+`bin/aws-cdk-gitlab-on-ecs.ts` を編集することで，AWS リージョンなどの設定パラメータを調整できます．利用可能なすべてのパラメータについては [`GitlabServerlessStackProps`](./lib/aws-cdk-gitlab-on-ecs-stack.ts) インターフェースも確認してください．
 
 その後，以下のコマンドを実行してスタック全体をデプロイできます．
 
-```
+```sh
 # install npm dependencies
 npm ci
 # bootstrap the AWS account (required only once per account and region)
@@ -66,7 +66,7 @@ arn:aws:cloudformation:ap-northeast-1:XXXXXXXXXXXX:stack/GitlabServerlessStack/5
 
 以下のコマンドを実行します．EFS（Gitlab のリポジトリ用のストレージ）を含む全てのリソースが削除される点にご注意下さい．
 
-```
+```sh
 npx cdk destroy --force
 ```
 
