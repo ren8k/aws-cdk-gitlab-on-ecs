@@ -1,19 +1,17 @@
-# デプロイオプション
+# Deployment Options
 
-[`bin/aws-cdk-gitlab-on-ecs.ts`](../bin/aws-cdk-gitlab-on-ecs.ts) を編集することで，デプロイオプションを指定することができます．以降に紹介するオプションを組み合わせることも可能です．
+You can specify deployment options by editing [`bin/aws-cdk-gitlab-on-ecs.ts`](../bin/aws-cdk-gitlab-on-ecs.ts). The following options can be combined as needed.
 
-## ALB にアクセス可能な IP レンジを指定する場合
+## Specifying IP Ranges Allowed to Access ALB
 
-以下のように，`allowedCidrs` を指定して下さい．
+Specify `allowedCidrs` as shown below:
 
 ```typescript
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
-
 const app = new cdk.App();
-
 new GitlabServerlessStack(app, "GitlabServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
@@ -23,18 +21,16 @@ new GitlabServerlessStack(app, "GitlabServerlessStack", {
 });
 ```
 
-## 新規作成する VPC の CIDR の指定や， NAT インスタンスを利用する場合
+## Specifying CIDR for New VPC and Using NAT Instance
 
-以下のように，`vpcCidr` と `useNatInstance` を指定して下さい．
+Specify `vpcCidr` and `useNatInstance` as shown below:
 
 ```typescript
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
-
 const app = new cdk.App();
-
 new GitlabServerlessStack(app, "GitlabServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
@@ -45,7 +41,6 @@ new GitlabServerlessStack(app, "GitlabServerlessStack", {
    * Available properties for GitlabServerlessStack configuration
    * Please refer to GitlabServerlessStackProps in lib/aws-cdk-gitlab-on-ecs-stack.ts
    */
-
   // Option 1: Deploy a new VPC (default setting)
   // - Specify CIDR and NAT instance if required
   vpcCidr: "10.1.0.0/16", // Optional CIDR for new VPC
@@ -53,49 +48,43 @@ new GitlabServerlessStack(app, "GitlabServerlessStack", {
 });
 ```
 
-## 既存の VPC を利用する場合
+## Using an Existing VPC
 
-以下のように，`vpcId` を指定して下さい．
+Specify `vpcId` as shown below:
 
 ```typescript
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
-
 const app = new cdk.App();
-
 new GitlabServerlessStack(app, "GitlabServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
   },
   allowedCidrs: ["0.0.0.0/0"],
-
   // Option 2: Use an existing VPC
   vpcId: "vpc-XXXXXXXXXXXXXXXXX", // VPC ID for existing VPC
 });
 ```
 
-## 既存のドメインを利用する場合
+## Using an Existing Domain
 
-以下のように，`domainName`，`subDomain`，`hostedZoneId` を指定して下さい．ここで，`hostedZoneId` は，Route 53 で管理しているドメインのホストゾーン ID です．（以下の例では，NAT Instance の有効化も行っています．）
+Specify `domainName`, `subDomain`, and `hostedZoneId` as shown below. Here, `hostedZoneId` is the hosted zone ID of the domain managed in Route 53.(The following example also enables NAT Instance.)
 
 ```typescript
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
-
 const app = new cdk.App();
-
 new GitlabServerlessStack(app, "GitlabServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
   },
   useNatInstance: true, // Optional NAT instance usage
-
   // Custom Domain Configuration
   // - Define a domain and subdomain if using a custom domain
   domainName: "example.com", // Root domain name
@@ -104,25 +93,22 @@ new GitlabServerlessStack(app, "GitlabServerlessStack", {
 });
 ```
 
-## Gitlab のバージョン指定，管理者の email 指定する場合
+## Specifying GitLab Version and Administrator Email
 
-以下のように，`gitlabRootEmail`，`gitlabImageTag` を指定して下さい．
+Specify `gitlabRootEmail` and `gitlabImageTag` as shown below:
 
 ```typescript
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
 import { GitlabServerlessStack } from "../lib/aws-cdk-gitlab-on-ecs-stack";
-
 const app = new cdk.App();
-
 new GitlabServerlessStack(app, "GitlabServerlessStack", {
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,
   },
   allowedCidrs: ["0.0.0.0/0"],
-
   // Custom GitLab Version Configuration
   // - Configure GitLab root email and specific GitLab image version if needed
   gitlabRootEmail: "admin@example.com", // Root email for GitLab

@@ -1,21 +1,40 @@
-# Welcome to your CDK TypeScript project
+# GitLab Deployment Using AWS CDK
 
-This is a blank project for CDK development with TypeScript.
+Self-host [GitLab](https://about.gitlab.com/) on AWS managed services using AWS CDK as an alternative to CodeCommit.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+![architecture](./assets/gitlab_architecture.png)
 
-## Useful commands
+## Key Features
 
-- `npm run build` compile typescript to js
-- `npm run watch` watch for changes and compile
-- `npm run test` perform the jest unit tests
-- `npx cdk deploy` deploy this stack to your default AWS account/region
-- `npx cdk diff` compare deployed stack with current state
-- `npx cdk synth` emits the synthesized CloudFormation template
+- Minimal maintenance overhead using fully managed services
+  - Leverages ECS Fargate and EFS
+- Cost-efficient architecture design
+  - Option to use NAT instances instead of NAT Gateway
+- Seamless integration with existing AWS resources
+  - Ability to host GitLab within existing VPC
+  - Support for existing domain names
 
-## Deploy
+## Prerequisites
 
-```
+The following dependencies must be installed to deploy this application:
+
+- [Node.js](https://nodejs.org/en/download/package-manager) (v22 or later)
+- [AWS CDK](https://docs.aws.amazon.com/cdk/v2/guide/work-with-cdk-typescript.html) (v2 or later)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and an IAM profile with `Administrator policy`
+
+## Deployment
+
+> [!IMPORTANT]
+> For detailed deployment parameter configuration, please refer to [this guide](./docs/DEPLOY_OPTION.md).
+
+> [!TIP]
+> For deployment using CloudShell, please refer to [this guide](./docs/DEPLOY_ON_CLOUDSHELL.md).
+
+You can adjust configuration parameters such as AWS region by editing `bin/aws-cdk-gitlab-on-ecs.ts`. For all available parameters, please also check the [`GitlabServerlessStackProps`](./lib/aws-cdk-gitlab-on-ecs-stack.ts) interface.
+
+Then, you can deploy the entire stack by running the following commands from the repository root:
+
+```sh
 # install npm dependencies
 npm ci
 # bootstrap the AWS account (required only once per account and region)
@@ -24,18 +43,39 @@ npx cdk bootstrap
 npx cdk deploy
 ```
 
----
+Initial deployment typically takes around 20 minutes. After a successful deployment, you will get the URL for the application:
 
----
+```
+ ✅  GitlabServerlessStack
+✨  Deployment time: 1003.7s
+Outputs:
+GitlabServerlessStack.GitlabUrl = https://gitlab.example.com
+Stack ARN:
+arn:aws:cloudformation:ap-northeast-1:XXXXXXXXXXXX:stack/GitlabServerlessStack/5901fab0-a4e6-11ef-9796-0e94afb0bd61
+✨  Total time: 1006.43s
+```
 
-wget https://raw.githubusercontent.com/ren8k/aws-cdk-ecs-gitlab/refs/heads/main/deploy.sh -O deploy.sh
-chmod +x deploy.sh
+## Signing in to GitLab
 
-一時的な不具合で，`500: We're sorry, something went wrong on our end` が出た場合，再度デプロイするか，ECS タスクの再デプロイを行ってください．
+The default administrator username is `root`. The password is stored in Secrets Manager and is a randomly generated string created during deployment.
 
-## References
+![signin](./assets/gitlab_signin.png)
 
-- https://github.com/aws-samples/generative-ai-use-cases-jp/blob/main/docs/DEPLOY_ON_CLOUDSHELL.md
-- https://github.com/aws-samples/well-architected-iac-analyzer
-- https://github.com/aws-samples/dify-self-hosted-on-aws/
-- https://github.com/aws-samples/bedrock-claude-chat
+## Cleanup
+
+Execute the following command. Please note that this will delete all resources, including the EFS (storage for GitLab repositories):
+
+```sh
+npx cdk destroy --force
+```
+
+## Acknowledgments
+
+The implementation of this CDK was inspired by the following repositories and resources:
+
+- [aws-samples/dify-self-hosted-on-aws](https://github.com/aws-samples/dify-self-hosted-on-aws)
+- [aws-samples/generative-ai-use-cases-jp](https://github.com/aws-samples/generative-ai-use-cases-jp)
+- [AWS CDK Best Practices for Beginners 2024](https://speakerdeck.com/konokenj/cdk-best-practice-2024)
+- [Addressing Common AWS CDK Concerns](https://speakerdeck.com/tmokmss/answering-cdk-faqs)
+- [Learning When to Use Unit Tests in AWS CDK](https://aws.amazon.com/jp/builders-flash/202411/learn-cdk-unit-test/)
+- [Best Practices for Developing Cloud Applications with AWS CDK](https://aws.amazon.com/jp/blogs/news/best-practices-for-developing-cloud-applications-with-aws-cdk/)
