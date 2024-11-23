@@ -62,6 +62,8 @@ arn:aws:cloudformation:ap-northeast-1:XXXXXXXXXXXX:stack/GitlabServerlessStack/5
 
 デフォルトの管理者ユーザー名は`root`です．パスワードは Secrets Manager に保存されており，デプロイ時に生成されたランダムな文字列です．
 
+![signin](./assets/gitlab_signin.png)
+
 ## リソースの削除方法
 
 以下のコマンドを実行します．EFS（Gitlab のリポジトリ用のストレージ）を含む全てのリソースが削除される点にご注意下さい．
