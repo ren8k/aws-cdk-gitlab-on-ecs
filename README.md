@@ -76,6 +76,7 @@ The implementation of this CDK was inspired by the following repositories and re
 - [aws-samples/dify-self-hosted-on-aws](https://github.com/aws-samples/dify-self-hosted-on-aws)
 - [aws-samples/generative-ai-use-cases-jp](https://github.com/aws-samples/generative-ai-use-cases-jp)
 - [AWS CDK Best Practices for Beginners 2024](https://speakerdeck.com/konokenj/cdk-best-practice-2024)
+- [Thinking About "Reusability" in AWS CDK](https://speakerdeck.com/gotok365/aws-cdk-reusability)
 - [Addressing Common AWS CDK Concerns](https://speakerdeck.com/tmokmss/answering-cdk-faqs)
 - [Learning When to Use Unit Tests in AWS CDK](https://aws.amazon.com/jp/builders-flash/202411/learn-cdk-unit-test/)
 - [Best Practices for Developing Cloud Applications with AWS CDK](https://aws.amazon.com/jp/blogs/news/best-practices-for-developing-cloud-applications-with-aws-cdk/)
