@@ -28,12 +28,12 @@ The following dependencies must be installed to deploy this application:
 ## Deployment
 
 > [!IMPORTANT]
-> For detailed deployment parameter configuration, please refer to [this guide](./docs/DEPLOY_OPTION.md).
+> For detailed deployment parameter configuration, refer to [this guide](./docs/DEPLOY_OPTION.md).
 
 > [!TIP]
-> For deployment using CloudShell, please refer to [this guide](./docs/DEPLOY_ON_CLOUDSHELL.md).
+> For deployment using CloudShell, refer to [this guide](./docs/DEPLOY_ON_CLOUDSHELL.md).
 
-You can adjust configuration parameters such as AWS region by editing `bin/aws-cdk-gitlab-on-ecs.ts`. For all available parameters, please also check the [`GitlabServerlessStackProps`](./lib/aws-cdk-gitlab-on-ecs-stack.ts) interface.
+You can adjust configuration parameters such as AWS region by editing `bin/aws-cdk-gitlab-on-ecs.ts`. For all available parameters, check the [`GitlabServerlessStackProps`](./lib/aws-cdk-gitlab-on-ecs-stack.ts) interface.
 
 Then, you can deploy the entire stack by running the following commands from the repository root:
 
@@ -66,7 +66,7 @@ The default administrator username is `root`. The password is stored in Secrets 
 
 ## Cleanup
 
-Execute the following command. Please note that this will delete all resources, including the EFS (storage for GitLab repositories):
+Execute the following command. Note that this will delete all resources, including the EFS (storage for GitLab repositories):
 
 ```sh
 npx cdk destroy --force
