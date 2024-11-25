@@ -1,4 +1,4 @@
-# GitLab Deployment Using AWS CDK
+# GitLab on AWS with CDK
 
 > [!NOTE]
 > 日本語ドキュメントは[こちら](./README_ja.md)にあります。
