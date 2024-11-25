@@ -1,6 +1,6 @@
 # AWS CDK による GitLab の構築
 
-CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gitlab.com/)を AWS マネージドサービス上でセルフホストします．
+CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gitlab.com/) を AWS マネージドサービス上でセルフホストします．
 
 ![architecture](./assets/gitlab_architecture.png)
 
