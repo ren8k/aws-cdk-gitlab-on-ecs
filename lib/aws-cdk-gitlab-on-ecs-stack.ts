@@ -102,7 +102,7 @@ export class GitlabServerlessStack extends cdk.Stack {
       vpc: network.vpc,
     });
 
-    // Security (Secrets Manager, IAM　Role)
+    // Security (Secrets Manager, IAM Role)
     const security = new Security(this, "Security", {
       gitlabRootEmail: rootEmail,
       fileSystem: storage.fileSystem,
