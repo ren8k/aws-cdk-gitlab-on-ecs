@@ -28,7 +28,6 @@ export class Security extends Construct {
         });
 
         // Allow ECS tasks to mount EFS
-        props.fileSystem.grantRootAccess(this.taskRole);
         props.fileSystem.grantReadWrite(this.taskRole);
 
         // Allow ECS tasks to login via SSM
