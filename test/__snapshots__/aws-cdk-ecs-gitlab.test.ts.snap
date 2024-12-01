@@ -1759,25 +1759,6 @@ sudo service iptables save",
               "Action": [
                 "elasticfilesystem:ClientMount",
                 "elasticfilesystem:ClientWrite",
-                "elasticfilesystem:ClientRootAccess",
-              ],
-              "Condition": {
-                "Bool": {
-                  "elasticfilesystem:AccessedViaMountTarget": "true",
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "Storage07F31EBC",
-                  "Arn",
-                ],
-              },
-            },
-            {
-              "Action": [
-                "elasticfilesystem:ClientMount",
-                "elasticfilesystem:ClientWrite",
               ],
               "Condition": {
                 "Bool": {
