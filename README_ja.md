@@ -9,9 +9,9 @@ CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gi
 - メンテナンスの労力が少ないフルマネージドサービスを採用
   - ECS Fargate, EFS を使用
 - コスト効率の良いアーキテクチャ設計
-  - NAT Gateway の代わりに NAT インスタンスの使用が可能
+  - NAT Gateway の代わりに NAT インスタンスを使用可能
 - 既存の AWS リソースとの連携
-  - 既存の VPC 内で GitLab をホスト構築可能
+  - 既存の VPC 内で GitLab をホスト可能
   - 既存のドメインの使用が可能
 
 ## 前提条件
