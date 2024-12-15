@@ -143,6 +143,95 @@ exports[`Snapshot test 1`] = `
     },
   },
   "Resources": {
+    "ComputingEcsTaskRoleDefaultPolicy385232BA": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite",
+              ],
+              "Condition": {
+                "Bool": {
+                  "elasticfilesystem:AccessedViaMountTarget": "true",
+                },
+              },
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "Storage07F31EBC",
+                  "Arn",
+                ],
+              },
+            },
+            {
+              "Action": [
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": "logs:DescribeLogGroups",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            {
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "ComputingEcsTaskRoleDefaultPolicy385232BA",
+        "Roles": [
+          {
+            "Ref": "ComputingEcsTaskRoleF47B137B",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "ComputingEcsTaskRoleF47B137B": {
+      "DependsOn": [
+        "EfsInitLambda90361438",
+        "EfsInitLambdaSecurityGroupB92B6A9F",
+        "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
+        "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
+        "EfsInitLambdaServiceRoleBFEBCCD5",
+      ],
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
     "ComputingGitlabCluster7DAA5CDF": {
       "DependsOn": [
         "EfsInitLambda90361438",
@@ -163,14 +252,14 @@ exports[`Snapshot test 1`] = `
     },
     "ComputingGitlabService3C9B31E1": {
       "DependsOn": [
+        "ComputingEcsTaskRoleDefaultPolicy385232BA",
+        "ComputingEcsTaskRoleF47B137B",
         "EfsInitLambda90361438",
         "EfsInitLambdaSecurityGroupB92B6A9F",
         "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
         "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
         "EfsInitLambdaServiceRoleBFEBCCD5",
         "LoadBalancerGitlabListener98BA0C09",
-        "SecurityEcsTaskRoleDefaultPolicy355E0789",
-        "SecurityEcsTaskRole1DF5BF23",
       ],
       "Properties": {
         "Cluster": {
@@ -228,13 +317,13 @@ exports[`Snapshot test 1`] = `
     },
     "ComputingGitlabServiceSecurityGroup37BF2DD2": {
       "DependsOn": [
+        "ComputingEcsTaskRoleDefaultPolicy385232BA",
+        "ComputingEcsTaskRoleF47B137B",
         "EfsInitLambda90361438",
         "EfsInitLambdaSecurityGroupB92B6A9F",
         "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
         "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
         "EfsInitLambdaServiceRoleBFEBCCD5",
-        "SecurityEcsTaskRoleDefaultPolicy355E0789",
-        "SecurityEcsTaskRole1DF5BF23",
       ],
       "Properties": {
         "GroupDescription": "TestStack/Computing/GitlabService/SecurityGroup",
@@ -253,13 +342,13 @@ exports[`Snapshot test 1`] = `
     },
     "ComputingGitlabServiceSecurityGroupfromTestStackLoadBalancerSecurityGroup799ECE5E80AF3B4F3C": {
       "DependsOn": [
+        "ComputingEcsTaskRoleDefaultPolicy385232BA",
+        "ComputingEcsTaskRoleF47B137B",
         "EfsInitLambda90361438",
         "EfsInitLambdaSecurityGroupB92B6A9F",
         "EfsInitLambdaSecurityGrouptoTestStackStorageEfsSecurityGroupE865AC7E204918D8CCE7",
         "EfsInitLambdaServiceRoleDefaultPolicyF5E52BA0",
         "EfsInitLambdaServiceRoleBFEBCCD5",
-        "SecurityEcsTaskRoleDefaultPolicy355E0789",
-        "SecurityEcsTaskRole1DF5BF23",
       ],
       "Properties": {
         "Description": "Load balancer to target",
@@ -456,7 +545,7 @@ exports[`Snapshot test 1`] = `
         },
         "TaskRoleArn": {
           "Fn::GetAtt": [
-            "SecurityEcsTaskRole1DF5BF23",
+            "ComputingEcsTaskRoleF47B137B",
             "Arn",
           ],
         },
@@ -1733,81 +1822,6 @@ sudo service iptables save",
       },
       "Type": "AWS::SecretsManager::Secret",
       "UpdateReplacePolicy": "Delete",
-    },
-    "SecurityEcsTaskRole1DF5BF23": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "Service": "ecs-tasks.amazonaws.com",
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
-    },
-    "SecurityEcsTaskRoleDefaultPolicy355E0789": {
-      "Properties": {
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": [
-                "elasticfilesystem:ClientMount",
-                "elasticfilesystem:ClientWrite",
-              ],
-              "Condition": {
-                "Bool": {
-                  "elasticfilesystem:AccessedViaMountTarget": "true",
-                },
-              },
-              "Effect": "Allow",
-              "Resource": {
-                "Fn::GetAtt": [
-                  "Storage07F31EBC",
-                  "Arn",
-                ],
-              },
-            },
-            {
-              "Action": [
-                "ssmmessages:CreateDataChannel",
-                "ssmmessages:OpenDataChannel",
-                "ssmmessages:OpenControlChannel",
-                "ssmmessages:CreateControlChannel",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": "logs:DescribeLogGroups",
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-            {
-              "Action": [
-                "logs:CreateLogStream",
-                "logs:DescribeLogStreams",
-                "logs:PutLogEvents",
-              ],
-              "Effect": "Allow",
-              "Resource": "*",
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "SecurityEcsTaskRoleDefaultPolicy355E0789",
-        "Roles": [
-          {
-            "Ref": "SecurityEcsTaskRole1DF5BF23",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "Storage07F31EBC": {
       "DeletionPolicy": "Delete",
