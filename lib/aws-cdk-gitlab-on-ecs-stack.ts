@@ -102,10 +102,9 @@ export class GitlabServerlessStack extends cdk.Stack {
       vpc: network.vpc,
     });
 
-    // Security (Secrets Manager, IAM Role)
+    // Security (Secrets Manager)
     const security = new Security(this, "Security", {
       gitlabRootEmail: rootEmail,
-      fileSystem: storage.fileSystem,
     });
 
     // LoadBalancer (ALB, DNS)
@@ -127,7 +126,6 @@ export class GitlabServerlessStack extends cdk.Stack {
     // Computing (ECS, Fargate)
     const computing = new Computing(this, "Computing", {
       vpc: network.vpc,
-      taskRole: security.taskRole,
       fileSystem: storage.fileSystem,
       targetGroup: loadBalancer.targetGroup,
       gitlabSecret: security.gitlabSecret,
