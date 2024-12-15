@@ -9,7 +9,6 @@ import { Construct } from "constructs";
 
 export interface ComputingProps {
     readonly vpc: ec2.IVpc;
-    readonly taskRole: iam.IRole;
     readonly fileSystem: efs.IFileSystem;
     readonly targetGroup: elbv2.IApplicationTargetGroup;
     readonly gitlabSecret: secretsmanager.ISecret;
@@ -40,10 +39,16 @@ export class Computing extends Construct {
             containerInsights: true,
         });
 
+        const taskRole = new iam.Role(this, "EcsTaskRole", {
+            assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com"),
+        });
+        // Allow ECS tasks to mount EFS
+        props.fileSystem.grantReadWrite(taskRole);
+
         const taskDefinition = new ecs.FargateTaskDefinition(this, "GitlabTaskDefinition", {
             cpu: 2048,
             memoryLimitMiB: 6144, // require more than 6GB in my experience
-            taskRole: props.taskRole,
+            taskRole: taskRole,
             runtimePlatform: { cpuArchitecture: ecs.CpuArchitecture.X86_64 },
         });
 
