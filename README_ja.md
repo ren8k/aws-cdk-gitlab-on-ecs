@@ -4,6 +4,11 @@ CodeCommit の代替として，AWS CDK を利用し，[GitLab](https://about.gi
 
 ![architecture](./assets/gitlab_architecture.png)
 
+> [!NOTE]
+> 本実装の解説記事を Qiita に投稿しております．是非そちらもご覧下さい！
+>
+> [CodeCommit の代替として GitLab on AWS を CDK で一撃で構築する](https://qiita.com/ren8k/items/3724c4dd8e519e8e3bf0)
+
 ## 特徴
 
 - メンテナンスの労力が少ないフルマネージドサービスを採用
