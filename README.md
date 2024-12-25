@@ -7,6 +7,11 @@ Self-host [GitLab](https://about.gitlab.com/) on AWS managed services using AWS 
 
 ![architecture](./assets/gitlab_architecture.png)
 
+> [!NOTE]
+> I have published an article explaining this implementation on Qiita. Please check it out!
+>
+> [Building GitLab on AWS with CDK as a CodeCommit Alternative in One Shot](https://qiita.com/ren8k/items/3724c4dd8e519e8e3bf0)
+
 ## Key Features
 
 - Minimal maintenance overhead using fully managed services
