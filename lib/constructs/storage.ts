@@ -18,6 +18,7 @@ export class Storage extends Construct {
             vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
             enableAutomaticBackups: true,
             removalPolicy: cdk.RemovalPolicy.DESTROY,
+            throughputMode: efs.ThroughputMode.ELASTIC, // GitLab requires high I/O throughput
         });
     }
 }
